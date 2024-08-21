@@ -11,3 +11,8 @@ services:
       user: drupal
       password: drupal
       database: drupal
+
+  appserver:
+    overrides:
+      environment:
+        DRUSH_OPTIONS_URI: 'http://technical-challenge.lndo.site/'
