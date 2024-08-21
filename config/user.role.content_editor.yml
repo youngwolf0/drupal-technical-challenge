@@ -1,0 +1,82 @@
+uuid: 0b93c145-8dc2-4853-a91b-d2a1fed2c527
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - node.type.blog
+    - node.type.event
+    - node.type.page
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.editorial
+  module:
+    - comment
+    - content_moderation
+    - contextual
+    - file
+    - filter
+    - help
+    - node
+    - path
+    - system
+    - taxonomy
+    - toolbar
+    - tour
+_core:
+  default_config_hash: Wur9kcEOwY1Jal81NssKnz3RhVJxAvBwyWQBGcA_1Go
+id: content_editor
+label: 'Content editor'
+weight: 2
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access help pages'
+  - 'access toolbar'
+  - 'access tour'
+  - 'administer url aliases'
+  - 'create blog content'
+  - 'create event content'
+  - 'create page content'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'delete any blog content'
+  - 'delete any event content'
+  - 'delete any page content'
+  - 'delete blog revisions'
+  - 'delete event revisions'
+  - 'delete own blog content'
+  - 'delete own event content'
+  - 'delete own files'
+  - 'delete own page content'
+  - 'delete page revisions'
+  - 'edit any blog content'
+  - 'edit any event content'
+  - 'edit any page content'
+  - 'edit own blog content'
+  - 'edit own comments'
+  - 'edit own event content'
+  - 'edit own page content'
+  - 'edit terms in tags'
+  - 'revert all revisions'
+  - 'revert blog revisions'
+  - 'revert event revisions'
+  - 'revert page revisions'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view blog revisions'
+  - 'view event revisions'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view the administration theme'

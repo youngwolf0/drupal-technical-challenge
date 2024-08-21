@@ -1,0 +1,10 @@
+name: 'Assessment Poster'
+type: module
+description: 'Provides a page showing a css recreation of a poster.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies: []
+
+twig:
+  namespaces:
+    assessment_poster: templates
