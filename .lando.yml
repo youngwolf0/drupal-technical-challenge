@@ -1,4 +1,13 @@
-name: empty-drupal
+name: technical-challenge
 recipe: drupal10
 config:
   webroot: web
+  php: '8.2'
+  composer_version: '2'
+
+services:
+  database:
+    creds:
+      user: drupal
+      password: drupal
+      database: drupal

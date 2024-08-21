@@ -34,6 +34,17 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "scripts": {
+        "drupal-scaffold": [
+            "@composer drupal:scaffold"
+        ],
+        "post-install-cmd": [
+            "@composer drupal:scaffold"
+        ],
+        "post-update-cmd": [
+            "@composer drupal:scaffold"
+        ]
+    },
     "config": {
         "allow-plugins": {
             "composer/installers": true,
@@ -49,6 +60,11 @@
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
+            },
+            "symlink": true,
+            "overwrite": true,
+            "file-mapping": {
+                "[web-root]/sites/default/settings.php": "src/settings.php"
             }
         },
         "installer-paths": {
