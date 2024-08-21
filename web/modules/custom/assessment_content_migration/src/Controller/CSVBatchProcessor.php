@@ -3,6 +3,8 @@
 namespace Drupal\assessment_content_migration\Controller;
 
 use DOMDocument;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 
@@ -38,13 +40,88 @@ class CSVBatchProcessor {
     $processed = 0;
 
     while ($processed < $batch_limit && $row = fgetcsv($context['sandbox']['file'])) {
+      // Check if the row has the expected number of columns
+      if (count($row) !== 6) {
+        \Drupal::messenger()->addMessage(t('The CSV file has an incorrect number of columns.'), 'error');
+        $context['finished'] = 1;
+        break;
+      }
+
       // Mapping CSV columns to variables.
       $legacy_id = $row[0];
       $title = $row[1];
-      $date = \DateTime::createFromFormat('m/d/Y', $row[2])->format('Y-m-d');
+      $date = $row[2];
       $type = $row[3];
       $category_name = $row[4];
       $content = $row[5];
+
+      if ($date == '14/21/2024') {
+        $jimmy = 0;
+      }
+
+      // Validate the date format
+      try {
+        // Attempt to create the date object.
+        $drupal_date = DrupalDateTime::createFromFormat('m/d/Y', $date);
+
+        // If the date object wasn't created or doesn't match the expected format.
+        if (!$drupal_date || $drupal_date->format('m/d/Y') !== $date) {
+          throw new \Exception('Invalid date format');
+        }
+
+        // Set the timezone and format the date for storage.
+        $drupal_date->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+        $formatted_date = $drupal_date->format(DateTimeItemInterface::DATE_STORAGE_FORMAT);
+
+      } catch (\Exception $e) {
+        \Drupal::messenger()->addMessage(t('Invalid date format on row @row: @date. Either it doesn\'t meet the required format (m/d/Y or 02/21/2022) OR the date is not a valid date at all.', [
+          '@row' => $context['sandbox']['current'],
+          '@date' => $date,
+        ]), 'error');
+        $context['finished'] = 1;
+        break;
+      }
+
+      // Validate the data types.
+      if (!is_numeric($legacy_id)) {
+        \Drupal::messenger()->addMessage(t('The CSV file contains an invalid ID on row @row. It should be an number with no decimals.', [
+          '@row' => $context['sandbox']['current']
+        ]), 'error');
+        $context['finished'] = 1;
+        break;
+      }
+
+      if (!is_string($title) || empty($title)) {
+        \Drupal::messenger()->addMessage(t('The CSV file contains an invalid title on row @row. It should not be left blank.', [
+          '@row' => $context['sandbox']['current']
+        ]), 'error');
+        $context['finished'] = 1;
+        break;
+      }
+
+      if (!$date) {
+        \Drupal::messenger()->addMessage(t('The CSV file contains an invalid date format on row @row. It should be in the format m/d/Y (08/21/2020)', [
+          '@row' => $context['sandbox']['current']
+        ]), 'error');
+        $context['finished'] = 1;
+        break;
+      }
+
+      if (!is_string($category_name) || empty($category_name)) {
+        \Drupal::messenger()->addMessage(t('The CSV file contains an invalid category on row @row.  It should not be left blank', [
+          '@row' => $context['sandbox']['current']
+        ]), 'error');
+        $context['finished'] = 1;
+        break;
+      }
+
+      if (!is_string($content)) {
+        \Drupal::messenger()->addMessage(t('The CSV file contains an invalid content value on row @row.  It should not be left blank.', [
+          '@row' => $context['sandbox']['current']
+        ]), 'error');
+        $context['finished'] = 1;
+        break;
+      }
 
       // Sanitize content to remove JavaScript.
       $content = self::sanitizeContent($content);
@@ -57,21 +134,20 @@ class CSVBatchProcessor {
         // Load the existing node and update it.
         $node = Node::load($context['sandbox']['existing_nodes'][$legacy_id]);
         $node->setTitle($title);
-        $node->set('field_date', $date);
+        $node->set('field_date', $formatted_date);
         $node->set('field_category', ['target_id' => $category_tid]);
         $node->set('body', [
           'value' => $content,
           'format' => 'full_html',
         ]);
         $context['results']['updated']++;
-      }
-      else {
+      } else {
         // Create a new node.
         $node = Node::create([
           'type' => $type,
           'title' => $title,
           'field_legacy_id' => $legacy_id,
-          'field_date' => $date,
+          'field_date' => $formatted_date,
           'field_category' => ['target_id' => $category_tid],
           'body' => [
             'value' => $content,
@@ -82,6 +158,7 @@ class CSVBatchProcessor {
       }
 
       // Save the node.
+      $node->setPublished();
       $node->save();
 
       // Increment the counters.
@@ -118,8 +195,7 @@ class CSVBatchProcessor {
         '@imported' => $results['imported'],
         '@updated' => $results['updated'],
       ]));
-    }
-    else {
+    } else {
       \Drupal::messenger()->addMessage(t('The CSV import encountered errors.'), 'error');
     }
   }
@@ -135,10 +211,10 @@ class CSVBatchProcessor {
    */
   protected static function sanitizeContent($html) {
     $dom = new DOMDocument();
-    $dom->loadHTML($html);
+    @$dom->loadHTML($html);
     $script = $dom->getElementsByTagName('script');
     $remove = [];
-    foreach($script as $item) {
+    foreach ($script as $item) {
       $remove[] = $item;
     }
 

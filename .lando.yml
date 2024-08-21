@@ -11,8 +11,13 @@ services:
       user: drupal
       password: drupal
       database: drupal
+    portforward: 54321
 
   appserver:
+    xdebug: true
     overrides:
       environment:
         DRUSH_OPTIONS_URI: 'http://technical-challenge.lndo.site/'
+        PHP_IDE_CONFIG: 'serverName=drupal'
+        XDEBUG_SESSION_START: lando
+
