@@ -63,26 +63,29 @@
   }
 }
 
-.black {
-  background-color:#323846;
-}
-.grey {
-  background-color:#a8a0a2;
-}
-.brown {
-  background-color:#8d7b72;
+.dark_purple {
+  background-color:#4c3856;
 }
 .purple {
-  background-color:#6c537a;
-}
-.white {
-  background-color:#d5c4bc;
-}
-.pink {
-  background-color:#b769a1;
+  background-color:#6b527a;
 }
 .dark_pink {
-  background-color:#b362a9;
+  background-color:#a6579a;
+}
+.pink {
+  background-color:#ba7baf;
+}
+.brown {
+  background-color:#847872;
+}
+.grey {
+  background-color:#a4a1a1;
+}
+.cream {
+  background-color:#d7c9c4;
+}
+.black {
+  background-color: #221e23;
 }
 
 @media (min-width: 768px) {

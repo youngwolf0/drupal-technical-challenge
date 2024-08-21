@@ -56,7 +56,7 @@ class AssessmentPosterController extends ControllerBase {
         'row' => '3',
         'width' => '5%',
         'rows' => [
-          ['height' => '37.5%', 'color' => 'white'],
+          ['height' => '37.5%', 'color' => 'cream'],
           ['height' => '37.5%', 'color' => 'black'],
           ['height' => '25%', 'color' => 'brown'],
         ],
@@ -75,7 +75,7 @@ class AssessmentPosterController extends ControllerBase {
         'width' => '5%',
         'rows' => [
           ['height' => '17%', 'color' => 'pink'],
-          ['height' => '29%', 'color' => 'white'],
+          ['height' => '29%', 'color' => 'cream'],
           ['height' => '54%', 'color' => 'black'],
         ],
       ],
@@ -84,7 +84,7 @@ class AssessmentPosterController extends ControllerBase {
         'width' => '7%',
         'rows' => [
           ['height' => '8%', 'color' => 'brown'],
-          ['height' => '17%', 'color' => 'purple'],
+          ['height' => '17%', 'color' => 'dark_purple'],
           ['height' => '75%', 'color' => 'dark_pink'],
         ],
       ],
@@ -94,7 +94,7 @@ class AssessmentPosterController extends ControllerBase {
         'rows' => [
           ['height' => '75%', 'color' => 'grey'],
           ['height' => '17%', 'color' => 'pink'],
-          ['height' => '8%', 'color' => 'white'],
+          ['height' => '8%', 'color' => 'cream'],
         ],
       ],
       [
@@ -103,7 +103,7 @@ class AssessmentPosterController extends ControllerBase {
         'rows' => [
           ['height' => '54%', 'color' => 'black'],
           ['height' => '29%', 'color' => 'brown'],
-          ['height' => '17%', 'color' => 'purple'],
+          ['height' => '17%', 'color' => 'dark_purple'],
         ],
       ],
       [
@@ -119,7 +119,7 @@ class AssessmentPosterController extends ControllerBase {
         'row' => '10',
         'width' => '9%',
         'rows' => [
-          ['height' => '25%', 'color' => 'white'],
+          ['height' => '25%', 'color' => 'cream'],
           ['height' => '38%', 'color' => 'black'],
           ['height' => '37%', 'color' => 'brown'],
         ],
@@ -128,7 +128,7 @@ class AssessmentPosterController extends ControllerBase {
         'row' => '11',
         'width' => '4%',
         'rows' => [
-          ['height' => '17%', 'color' => 'purple'],
+          ['height' => '17%', 'color' => 'dark_purple'],
           ['height' => '29%', 'color' => 'dark_pink'],
           ['height' => '54%', 'color' => 'grey'],
         ],
@@ -138,7 +138,7 @@ class AssessmentPosterController extends ControllerBase {
         'width' => '7%',
         'rows' => [
           ['height' => '8%', 'color' => 'pink'],
-          ['height' => '17%', 'color' => 'white'],
+          ['height' => '17%', 'color' => 'cream'],
           ['height' => '75%', 'color' => 'black'],
         ],
       ],
@@ -147,7 +147,7 @@ class AssessmentPosterController extends ControllerBase {
         'width' => '2%',
         'rows' => [
           ['height' => '75%', 'color' => 'brown'],
-          ['height' => '17%', 'color' => 'purple'],
+          ['height' => '17%', 'color' => 'dark_purple'],
           ['height' => '8%', 'color' => 'dark_pink'],
         ],
       ],
@@ -157,7 +157,7 @@ class AssessmentPosterController extends ControllerBase {
         'rows' => [
           ['height' => '54%', 'color' => 'grey'],
           ['height' => '29%', 'color' => 'pink'],
-          ['height' => '17%', 'color' => 'white'],
+          ['height' => '17%', 'color' => 'cream'],
         ],
       ],
       [
@@ -166,7 +166,7 @@ class AssessmentPosterController extends ControllerBase {
         'rows' => [
           ['height' => '38%', 'color' => 'black'],
           ['height' => '37%', 'color' => 'brown'],
-          ['height' => '25%', 'color' => 'purple'],
+          ['height' => '25%', 'color' => 'dark_purple'],
         ],
       ],
       [
@@ -182,7 +182,7 @@ class AssessmentPosterController extends ControllerBase {
         'row' => '17',
         'width' => '5%',
         'rows' => [
-          ['height' => '17%', 'color' => 'white'],
+          ['height' => '17%', 'color' => 'cream'],
           ['height' => '29%', 'color' => 'black'],
           ['height' => '54%', 'color' => 'brown'],
         ],
